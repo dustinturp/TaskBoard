@@ -212,38 +212,17 @@ const saveTasks = function() {
 }
 
 const loadTasks = function() {
-    //compare with createTaskEl
-    // load tasks
-    listItemEl = document.createElement("li");
-    taskInfoEl = document.createElement("div");
-    // append task actins el to list itemEl
-    //taskActionsEl added to 
-   tasks = localStorage.getItem("tasks");
-   console.log(tasks)
-    for (let i = 0; i < tasks.length; i ++){
-        console.log(tasks[i])
-        //if varableName === null or !variableName
-        if (tasks[i].taskIdCounter === parseInt(taskId)) {
-            tasks[i].status = statusValue;
-            tasks = JSON.parse(tasks)
-        }
-        else if (tasks[i].status === "in progress") { 
-            listItemEl.querySelector("select[name='status-change']").selectedIndex = 1;
-            //append list item to TaskInProgress
-            taskIdCounter ++;
+    //set to let needs to be reassigned.
+   let savedTasks = localStorage.getItem("tasks");
+   if (!savedTasks){
+       task = [];
+       return false;
+   }
+   savedTasks = JSON.parse(savedTasks);
 
-        }
-        else if (tasks[i].status === "complete") {
-            listItemEl.querySelector("select[name='status-change']").selectedIndex = 2;
-            //append listItemEl to task CompletedEl
-            taskIdCounter ++;
-        }
-    }
-    for (let i = 0; i < tasks.length; i ++) {
-        // create li  store to listitem el 
-    }
-    taskInfoEl.innerHTML = "h3 class='task-name'>" + tasks[i].name + "</h3><span class='task-type'>" + tasks[i].type + "</span>";
-    saveTasks();
+   for (var i = 0; i < saveTasks.length; i++) {
+       createTaskEl(saveTasks[i]);
+   }
 };
 
 // Create a new task
